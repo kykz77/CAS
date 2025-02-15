@@ -1,4 +1,9 @@
 # Computer Algebra System (CAS)
+## Contents
+- [Introduction](https://github.com/kykz77/CAS?tab=readme-ov-file#introduction)
+- [Compilation](https://github.com/kykz77/CAS?tab=readme-ov-file#compilation)
+- [Examples](https://github.com/kykz77/CAS?tab=readme-ov-file#examples)
+
 ## Introduction
 This project is an open-source computer algebra system (CAS). It will likely never become as advanced as 
 something such as wolfram alpha, but I thought it would just be a cool side project to make :) As it is 
@@ -30,7 +35,9 @@ outputs/main
 ```
 
 ## Examples
-### Evaluating Expressions
+### Contents
+
+### Evaluate
 #### Example
 ```cpp
 //Import
@@ -55,7 +62,7 @@ std::cout << result << std::endl;
 85251.2
 ```
 
-### Expanding Expressions
+### Expand & Simplify
 #### Example
 ```cpp
 //Import
@@ -82,7 +89,7 @@ std::cout << result->to_string() << std::endl;
 (((((319 * 1) + (-76 * (x ^ 1))) + (-1296 * (1 / ((x ^ 1) + 4)))) + (21 * (x ^ 2))) + (-5 * (x ^ 3)))
 ```
 
-### Factorising Expressions
+### Factorise
 #### Example
 ```cpp
 //Import
@@ -109,7 +116,7 @@ std::cout << result->to_string() << std::endl;
 ((((x + (-1 * -1)) * (x + (-1 * 5))) * (x + (-1 * -1.732051))) * (x + (-1 * 1.732051)))
 ```
 
-### Finding Roots
+### Zeros
 #### Example
 ```cpp
 //Import
