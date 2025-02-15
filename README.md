@@ -19,7 +19,7 @@ The other features which I am working on include:
 
 ## Compilation
 The program can be compiled using g++. The code below can be run in the terminal in the /src diretory to compile the program. 
-In this example, we are assuming the executable path will be 'outputs/main' and the name of our name file is 'main.cpp'.
+In this example, we are assuming the executable path will be 'outputs/main' and the name of our main file is 'main.cpp'.
 ```cpp
 g++ -Wno-conversion-null -o outputs/main main.cpp node.cpp parser.cpp algebra.cpp
 ```
