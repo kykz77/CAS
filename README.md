@@ -7,13 +7,15 @@ in its early stages only polynomials are supported for now, with plans to make i
 Currently, the features include:
 - Evaluating expressions
 - Expanding expressions
+- Factorising expressions
+- Solving algebraic equations symbolically
 
 The other features which I am working on include:
 - Supporting for implied powers and multiplication
 - Make this program into a CLI thing rather than a code editor thing
-- Factorising expressions
-- Solving algebraic equations symbolically and numerically
+- Solving algebraic equations numerically
 - Format the printing better so it looks less cringe
+- Add support for more variables other than 'x'
 
 ## Compilation
 The program can be compiled using g++. The code below can be run in the terminal in the /src diretory to compile the program. 
@@ -48,7 +50,7 @@ float result = root->eval();
 //Display the result
 std::cout << result << std::endl;
 ```
-#### Expected Output
+#### Output
 ```cpp
 85251.2
 ```
@@ -75,7 +77,65 @@ Node* result = expand(root);
 std::cout << result->to_string() << std::endl;
 ```
 
-#### Expected Output
+#### Output
 ```cpp
 (((((319 * 1) + (-76 * (x ^ 1))) + (-1296 * (1 / ((x ^ 1) + 4)))) + (21 * (x ^ 2))) + (-5 * (x ^ 3)))
 ```
+
+### Factorising Expressions
+#### Example
+```cpp
+//Import
+#include <iostream>
+#include <string>
+#include "parser.hpp"
+#include "algebra.hpp"
+
+//The expression we want to factorise
+std::string expr = "x^4-4*x^3-8*x^2+12*x^1+15";
+
+//Construct the expression tree
+Node* root = construct_expr(expr);
+
+//Factorise the tree
+Node* result = factorise(root, "x");
+
+//Display the factorised result
+std::cout << result->to_string() << std::endl;
+```
+
+#### Output
+```cpp
+((((x + (-1 * -1)) * (x + (-1 * 5))) * (x + (-1 * -1.732051))) * (x + (-1 * 1.732051)))
+```
+
+### Finding Roots
+#### Example
+```cpp
+//Import
+#include <iostream>
+#include <string>
+#include <vector>
+#include "parser.hpp"
+#include "algebra.hpp"
+
+//The expression we want to factorise
+std::string expr = "x^4-4*x^3-8*x^2+12*x^1+15";
+
+//Construct the expression tree
+Node* root = construct_expr(expr);
+
+//Deterimine the zeros of the polynomial
+std::vector<float> result = zeros(root, "x");
+
+//Print out the vector, lol the formatting is quite bad
+for (const auto& num : result) {
+  std::cout << num << " , ";
+};
+```
+
+#### Output
+```cpp
+-1 , 5 , -1.73205 , 1.73205 ,
+```
+
