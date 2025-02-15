@@ -11,7 +11,7 @@ Currently, the features include:
 - Solving algebraic equations symbolically
 
 The other features which I am working on include:
-- Supporting for implied powers and multiplication
+- Support for implied powers and multiplication
 - Make this program into a CLI thing rather than a code editor thing
 - Solving algebraic equations numerically
 - Format the printing better so it looks less cringe
