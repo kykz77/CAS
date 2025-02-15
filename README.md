@@ -37,7 +37,7 @@ outputs/main
 #include "parser.hpp"
 
 //The expression we want to evaluate
-std::string expr = "((1/42 * sin(69))*(4*420 + 13*9001)^4)";
+std::string expr = "(4 - 4/5)*(42*420 + 9001)";
 
 //Construct the expression tree
 Node* root = construct_expr(expr);
@@ -50,7 +50,7 @@ std::cout << result << std::endl;
 ```
 #### Expected Output
 ```cpp
-3.26031e+20
+85251.2
 ```
 
 ### Expanding Expressions
