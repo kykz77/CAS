@@ -37,23 +37,23 @@ Node::operator std::string() const {
 };
 
 Node* Node::operator+(Node* other) {
-    return simplify(add(other));
+    return (add(other));
 };
 
 Node* Node::operator-(Node* other) {
-    return simplify(subtract(other));
+    return (subtract(other));
 };
 
 Node* Node::operator*(Node* other) {
-    return simplify(multiply(other));
+    return (multiply(other));
 };
 
 Node* Node::operator/(Node* other) {
-    return simplify(divide(other));
+    return (divide(other));
 };
 
 Node* Node::operator^(Node* other) {
-    return simplify(power(other));
+    return (power(other));
 };
 
 // =============== FUNCTIONS ================ //

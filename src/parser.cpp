@@ -151,6 +151,5 @@ Node* construct_tree(const std::vector<std::string>& postfix) {
 Node* construct_expr(const std::string& expr) {
     std::vector<std::string> tokens = tokenize(expr);
     std::vector<std::string> postfix = in_to_post(tokens);
-    Node* root = construct_tree(postfix);
-    return simplify(root);
+    return construct_tree(postfix);
 };

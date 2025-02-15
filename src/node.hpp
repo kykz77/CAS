@@ -43,6 +43,10 @@ class Node {
         Node* divide(Node* other);
         Node* power(Node* other);
 
+        //Calculus operators TODO
+        // Node* differentiate(); //returns derivative of function 
+        // Node* integrate(); //returns integral of function (IF POSSIBLE)
+
         // Operator overload for converting into string
         operator std::string() const;
         Node* operator+(Node* other);
@@ -154,7 +158,7 @@ class Multiply : public Binary {
 
 class Divide : public Binary {
     public:
-        Divide(Node* left, Node* right);
+        Divide(Node* left, Node* right); //Assume left == numerator, right == denominator
 
         float eval() override;
 };
