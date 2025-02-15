@@ -15,10 +15,21 @@ The other features which I am working on include:
 - Solving algebraic equations symbolically and numerically
 - Format the printing better so it looks less cringe
 
-Below are some examples of how the thing will work, enjoy :)
+## Compilation
+The program can be compiled using g++. The code below can be run in the terminal in the /src diretory to compile the program. 
+In this example, we are assuming the executable path will be 'outputs/main' and the name of our name file is 'main.cpp'.
+```cpp
+g++ -Wno-conversion-null -o outputs/main main.cpp node.cpp parser.cpp algebra.cpp
+```
+After sucessful compilation, the executable can be run via the terminal by inputting the executable path. Continuing our example,
+we would run:
+```cpp
+outputs/main
+```
 
 ## Examples
 ### Evaluating Expressions
+#### Example
 ```cpp
 //Import
 #include <iostream>
@@ -37,7 +48,13 @@ float result = root->eval();
 //Display the result
 std::cout << result << std::endl;
 ```
+#### Expected Output
+```cpp
+3.26031e+20
+```
+
 ### Expanding Expressions
+#### Example
 ```cpp
 //Import
 #include <iostream>
@@ -56,4 +73,9 @@ Node* result = expand(root);
 
 //Print out the expanded expression
 std::cout << result->to_string() << std::endl;
+```
+
+#### Expected Output
+```cpp
+(((((319 * 1) + (-76 * (x ^ 1))) + (-1296 * (1 / ((x ^ 1) + 4)))) + (21 * (x ^ 2))) + (-5 * (x ^ 3)))
 ```
