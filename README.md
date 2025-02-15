@@ -119,7 +119,7 @@ std::cout << result->to_string() << std::endl;
 #include "parser.hpp"
 #include "algebra.hpp"
 
-//The expression we want to factorise
+//The polynomial we want to find the roots for
 std::string expr = "x^4-4*x^3-8*x^2+12*x^1+15";
 
 //Construct the expression tree
