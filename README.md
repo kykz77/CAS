@@ -36,7 +36,10 @@ outputs/main
 
 ## Examples
 ### Contents
-
+- [Evaluate](https://github.com/kykz77/CAS#evaluate)
+- [Expand & Simplify](https://github.com/kykz77/CAS#expand--simplify)
+- [Factorise](https://github.com/kykz77/CAS#factorise)
+- [Zeros](https://github.com/kykz77/CAS#zeros)
 ### Evaluate
 #### Example
 ```cpp
