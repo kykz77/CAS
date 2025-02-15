@@ -6,23 +6,21 @@
 //g++ -Wno-conversion-null -o outputs/test testing.cpp node.cpp parser.cpp algebra.cpp
 
 int main() {
-    //Expressions
+    // //Expressions
     std::cout << "Expression" << std::endl;
-    Node* expr_1 = expand(construct_expr("(x^1+1)*(x^1-4)"));
+    Node* expr_1 = expand(construct_expr("x^4-4*x^3-8*x^2+12*x^1+15"));
 
-    //Get the terms from first and second expressions
-    std::cout << "Terms" << std::endl;
-    Terms terms_1;
-    get_terms(expr_1, terms_1);
+    std::cout << "Expanded" << std::endl;
+    std::cout << expr_1->to_string() << std::endl;
 
-    std::cout << "To Vec" << std::endl;
-    std::vector<float> coeff = terms_to_vec(terms_1);
-    std::vector<float> result = quadratic_formula(coeff);
-
-    std::cout << "Display result " << std::endl;
-    for (const auto& num : result) {
-        std::cout << num << " , ";
-    };
-
+    Node* result = factorise(expr_1, "x");
+    std::cout << result->to_string() << std::endl;
+    
+    // std::vector<float> num = {-20,5,4,-1};
+    // std::vector<float> denom = {-1,4};
+    // auto [quotient, remain] = long_division(num, denom);
+    // for (const auto& num : quotient) {
+    //     std::cout << num << " , ";
+    // };
     return 0;
 };

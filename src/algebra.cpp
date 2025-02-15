@@ -175,8 +175,9 @@ Node* expand(Node* root) {
 };
 
 Node* substitute(Node* root, std::string var, float value) {
-    if (root->str == var) {
-        return new Constant(value);
+    if (auto* node = dynamic_cast<Variable*>(root)) {
+        node->value = value;
+        return root;
     };
 
     if (auto* node = dynamic_cast<Binary*>(root)) {
@@ -215,11 +216,12 @@ std::vector<Divide*> rational_root(Terms& terms, int lead_coeff, int const_coeff
     std::vector<int> lead_factors = get_factors(lead_coeff);
     std::vector<int> const_factors = get_factors(const_coeff);
     std::vector<Divide*> roots; //The possible rational roots
-    
+
     //Determine the possible rational roots by dividing the numbers by each other
     for (const auto& const_factor : const_factors) {
         for (const auto& lead_factor : lead_factors) {
             roots.push_back(new Divide(new Constant(const_factor) , new Constant(lead_factor))); //Add in a fraction
+            roots.push_back(new Divide(new Constant(-const_factor) , new Constant(lead_factor)));
         };
     };
 
@@ -242,7 +244,7 @@ std::vector<float> quadratic_formula(std::vector<float> coeff) {
     discrim = std::pow(b, 2) - 4 * a * c;
 
     //Incase there is no solution, to prevent error (idk if C++ allows complex stuff)
-    if (abs(discrim) < 1e-12) { //Do abs(num) < tol due to floating point stuff 
+    if (fabs(discrim) < 1e-6) { //Do abs(num) < tol due to floating point stuff 
         return {};
     };
 
@@ -366,34 +368,81 @@ Terms vec_to_terms(std::vector<float> vec) {
     return terms;
 };
 
-Node* factorise(Node* root, std::string var) {
-
+std::vector<float> zeros(Node* root, std::string var) {
     //Get the terms in the tree
     Terms terms;
     get_terms(root, terms);
 
     //Pre-allocate a vector to hold the coefficients
-    std::vector<float> coeff = terms_to_vec(terms);
+    std::vector<float> coeffs = terms_to_vec(terms);
 
     //Declare variables for coeffs
-    float lead_coeff = coeff[coeff.size() - 1];
-    float const_coeff = coeff[0];
+    int orig = coeffs.size();
+    float lead_coeff = coeffs[coeffs.size() - 1];
+    float const_coeff = coeffs[0];
 
     //Use the rational root function to determine the possible rational roots
+    std::vector<float> denom;
     std::vector<Divide*> possible_roots = rational_root(terms, lead_coeff, const_coeff);
-    std::vector<Divide*> factors;
+    std::vector<float> roots;
     Node* node;
 
     //Use the factor theorem to determine whether the thing is a root
     for (const auto& value : possible_roots) {
-        node = substitute(value, var, value->eval());
+        node = substitute(root, var, value->eval());
+        
         if (node->eval() == 0) {
-            factors.push_back(value);
+            roots.push_back(value->eval());
+            
+            //Update the coefficients by long division
+            denom = {-value->left->eval(), value->right->eval()};
+            auto [quotient, remain] = long_division(coeffs, denom);
+
+            //Update the coefficients
+            coeffs = quotient;
+        };
+    };
+    
+    //If it is either a linear or quadratic these can be solved quite easily
+    
+    //It is a linear equation now
+    int deg = coeffs.size() - 1;
+    std::vector<float> extra; //Other factors
+    if (deg == 1) {
+        roots.push_back(-coeffs[0] / coeffs[1]);
+    } else if (deg == 2) {
+        extra = quadratic_formula(coeffs);
+        
+        for (const auto& num : extra) {
+            roots.push_back(num);
         };
     };
 
-    //Check to see if the degree of the leading coefficient is equal to the number of roots found
+    return roots;
+};
 
+Node* factorise(Node* root, std::string var) {
 
-    return root;
+    //Initilise new root
+    Node* new_root = nullptr;
+    Node* new_node;
+
+    //Get the zeros of the number
+    std::vector<float> roots = zeros(root, var);
+
+    //Re-arrange the thing so it is factorised
+    for (const auto& num : roots) {
+
+        //Init a new bracket
+        new_node = new Subtract(new Variable(NULL) , new Constant(num)); 
+
+        //Either set, or multiply to the current root
+        if (!new_root) {
+            new_root = new_node;
+        } else {
+            new_root = new Multiply(new_root, new_node);
+        };
+    };
+
+    return new_root;
 };

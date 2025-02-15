@@ -19,6 +19,7 @@ Terms vec_to_terms(std::vector<float> vec);
 //Algebric functions
 Node* expand(Node* root); //Expands the function
 Node* factorise(Node* root, std::string var); //Factorises the function
+std::vector<float> zeros(Node* root, std::string var);
 Node* substitute(Node* root, std::string var, float value); //substitute value for variable
 std::vector<float> quadratic_formula(std::vector<float> coeff);
 std::pair<std::vector<float>, std::vector<float>> long_division(std::vector<float> num, std::vector<float> denom); //poly long divis

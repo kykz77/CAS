@@ -84,7 +84,7 @@ std::string Value::to_string() const {
 // =========================================================== CONST =========================================================== //
 // Implementation of Constant member functions
 Constant::Constant(float value) : Value(value) {
-    this->str = std::to_string(int(value)); //CHANGE AFTER TESTING DONE TO AVOID RANDOM AHHHHHHHHHH FLOATS
+    this->str = (fabs(int(value) - value) < 1e-6) ? std::to_string(int(value)) : std::to_string(value); 
 };
 
 float Constant::eval() {
