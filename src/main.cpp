@@ -15,7 +15,7 @@ outputs/main
 int main() {
 
     //Expressions
-    std::string expr = "(x^1-5)*(x^1+1)*(x^2-3)";
+    std::string expr = "x^4-4*x^3-8*x^2+12*x^1+15";
     std::cout << "Expression" << std::endl;
     std::cout << expr << std::endl;
     std::cout << std::endl;
@@ -36,7 +36,7 @@ int main() {
     for (const auto& root : roots) {
         std::cout << root << " , ";
     };
-    
+
     std::cout << std::endl;
 
     return 0;

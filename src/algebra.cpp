@@ -426,15 +426,18 @@ Node* factorise(Node* root, std::string var) {
     //Initilise new root
     Node* new_root = nullptr;
     Node* new_node;
+    Node* const_node;
 
     //Get the zeros of the number
     std::vector<float> roots = zeros(root, var);
 
     //Re-arrange the thing so it is factorised
     for (const auto& num : roots) {
-
+        //The constant
+        const_node = new Constant(num);
+        
         //Init a new bracket
-        new_node = new Subtract(new Variable(NULL) , new Constant(num)); 
+        new_node = new Add(new Variable(NULL) , const_node->negate()); 
 
         //Either set, or multiply to the current root
         if (!new_root) {
