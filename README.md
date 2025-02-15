@@ -1,4 +1,4 @@
-# CAS
+# Computer Algebra System (CAS)
 ## Introduction
 This project is an open-source computer algebra system (CAS). It will likely never become as advanced as 
 something such as wolfram alpha, but I thought it would just be a cool side project to make :) As it is 
