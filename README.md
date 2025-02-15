@@ -39,6 +39,7 @@ outputs/main
 - [Evaluate](https://github.com/kykz77/CAS#evaluate)
 - [Expand & Simplify](https://github.com/kykz77/CAS#expand--simplify)
 - [Factorise](https://github.com/kykz77/CAS#factorise)
+- [Substitute](https://github.com/kykz77/CAS#substitute)
 - [Zeros](https://github.com/kykz77/CAS#zeros)
 ### Evaluate
 #### Example
@@ -117,6 +118,36 @@ std::cout << result->to_string() << std::endl;
 #### Output
 ```cpp
 ((((x + (-1 * -1)) * (x + (-1 * 5))) * (x + (-1 * -1.732051))) * (x + (-1 * 1.732051)))
+```
+
+### Substitute
+#### Example
+```cpp
+//Import
+#include <iostream>
+#include <string>
+#include "parser.hpp"
+#include "algebra.hpp"
+
+//A polynomial expression
+std::string expr = "x^4-4*x^3-8*x^2+12*x^1+15";
+
+//Construct the expression tree
+Node* root = construct_expr(expr);
+
+//Subtitute in x == -4
+Node* new_root = substitute(root, "x", -4);
+
+//Evaluate the root to get the result
+float result = new_root->eval();
+
+//Display the result
+std::cout << result << std::endl;
+```
+
+#### Output
+```cpp
+351
 ```
 
 ### Zeros
